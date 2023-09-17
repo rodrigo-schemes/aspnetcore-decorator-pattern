@@ -12,20 +12,12 @@ public static class PopularDb
         
         if (appDbContexto.Clientes.Any()) return;
 
-        var clientes = new List<Cliente>();
-
-        for (var cont = 0; cont < 10; cont++)
-        {
-            var clienteFake = new Faker("pt_BR").Person;
-            
-            clientes.Add(new Cliente
-            {
-                Nome = clienteFake.FullName,
-                Email = clienteFake.Email
-            });
-        }
+        var clientesFake = new Faker<Cliente>("pt_BR")
+            .RuleFor(x => x.Nome, x => x.Person.FullName)
+            .RuleFor(x => x.Email, x => x.Person.Email)
+            .Generate(10);
         
-        appDbContexto.AddRange(clientes);
+        appDbContexto.AddRange(clientesFake);
         appDbContexto.SaveChanges();
     }
 }
