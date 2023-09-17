@@ -17,6 +17,7 @@ builder.Services.AddDbContext<AppDbContexto>(optionsBuilder =>
     
     optionsBuilder.UseSqlite($"Data Source={Path.Join(caminhoApp, "cliente.db")}");
 });
+
 builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
 
 var app = builder.Build();
@@ -24,11 +25,8 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
-
 app.MapControllers();
 
 app.AplicarMigracoes();
-app.InserirClientes();
 
 app.Run();
