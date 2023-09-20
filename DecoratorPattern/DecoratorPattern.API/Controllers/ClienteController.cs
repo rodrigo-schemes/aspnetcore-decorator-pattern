@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DecoratorPattern.API.Controllers;
 
+[Route("cliente")]
 public class ClienteController : ControllerBase
 {
     private readonly IClienteRepositorio _clienteRepositorio;

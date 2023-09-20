@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMemoryCache();
 
 builder.Services.AddDbContext<AppDbContexto>(optionsBuilder =>
 {
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<AppDbContexto>(optionsBuilder =>
 });
 
 builder.Services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+builder.Services.Decorate<IClienteRepositorio, ClienteCacheRepositorio>();
 
 var app = builder.Build();
 
